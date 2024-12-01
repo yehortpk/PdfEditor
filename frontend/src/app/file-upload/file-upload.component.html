@@ -1,0 +1,42 @@
+<form 
+  class="box" 
+  [ngClass]="{
+    'has-advanced-upload': isAdvancedUpload, 
+    'is-uploading': uploadStatus === 'uploading',
+    'is-success': uploadStatus === 'success', 
+    'is-error': uploadStatus === 'error'
+  }"
+  (dragover)="onDragOver($event)"
+  (dragenter)="onDragEnter($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+>
+  <div class="box__input">
+    <input 
+      #fileInput
+      type="file" 
+      name="files" 
+      id="file" 
+      class="box__file" 
+      (change)="onFileChange($event)"
+      multiple
+    />
+    <label for="file" class="box__label">
+      <strong>Choose a file</strong>
+      <span class="box__dragndrop"> or drag it here</span>.
+      <span class="box__filename">{{ getFileName() }}</span>
+    </label>
+  </div>
+
+  <div *ngIf="uploadStatus === 'error'" class="box__error">
+    <span>{{ errorMessage }}</span>
+  </div>
+
+  <div *ngIf="uploadStatus === 'success'" class="box__success">
+    Upload successful!
+  </div>
+
+  <div *ngIf="uploadStatus === 'error' || uploadStatus === 'success'" class="box__restart">
+    <button (click)="restart()">Upload another file</button>
+  </div>
+</form>

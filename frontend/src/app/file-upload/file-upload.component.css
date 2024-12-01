@@ -1,0 +1,78 @@
+.box {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  .box.is-dragover {
+    border-color: #0088cc;
+    background-color: #f0f0f0;
+  }
+  
+  .box__file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  
+  .box__label {
+    display: block;
+    cursor: pointer;
+    padding: 30px;
+  }
+  
+  .box__dragndrop {
+    color: #0088cc;
+  }
+  
+  .box__filename {
+    display: block;
+    margin-top: 10px;
+    color: #666;
+  }
+  
+  .box.is-uploading,
+  .box.is-success,
+  .box.is-error {
+    border-color: transparent;
+  }
+  
+  .box.is-uploading {
+    background-color: #f1f1f1;
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  .box.is-success {
+    border-color: green;
+    background-color: #e6f3e6;
+  }
+  
+  .box.is-error {
+    border-color: red;
+    background-color: #f9e6e6;
+  }
+  
+  .box__error,
+  .box__success {
+    margin-top: 15px;
+    color: #333;
+  }
+  
+  .box__restart button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #0088cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
