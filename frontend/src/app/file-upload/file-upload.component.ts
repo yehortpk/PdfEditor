@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-file-upload',
@@ -17,7 +18,7 @@ export class AppFileUploadComponent implements OnInit {
   uploadStatus: 'initial' | 'uploading' | 'success' | 'error' = 'initial';
   errorMessage: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
     this.checkAdvancedUpload();
@@ -67,10 +68,12 @@ export class AppFileUploadComponent implements OnInit {
 
       this.http.post('http://localhost:8080/process', formData).subscribe({
         next: (response: any) => {
-          this.uploadStatus = 'success';
-          // Redirect or handle successful upload
-          if (response && response.redirectUrl) {
-            window.location.href = response.redirectUrl;
+          if (response.redirectUrl) {
+            if (response.redirectUrl.startsWith('/')) {
+              this.router.navigateByUrl(response.redirectUrl);
+            } else {
+              window.location.href = response.redirectUrl;
+            }
           }
         },
         error: (error) => {

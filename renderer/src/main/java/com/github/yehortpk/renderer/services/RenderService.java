@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class RenderService {
+public class RenderService implements AutoCloseable {
     private static final String RESOURCE_DOCUMENTS_FILEPATH = "documents";
 
     @Getter
@@ -97,5 +97,10 @@ public class RenderService {
 
     public void savePdf(String fileURL) throws IOException {
         pdf.save(createAbsolutePDFFilepath(fileURL));
+    }
+
+    @Override
+    public void close() throws Exception {
+        pdf.close();
     }
 }
